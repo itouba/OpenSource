@@ -5,6 +5,7 @@ git config user.email "someone@someplace.com"
 git status   ---查看修改
 git add *    ---添加
 git add .    ---删除
+git rm file  -- 删除
 git commit -m '备注内容'
 
 第二步建立远程仓库，并在本地执行以下命令

@@ -1,0 +1,11 @@
+server:
+  port:  9090
+
+  app:
+    url: http://www.huairuan.com
+    token: tjp-123456
+    user: {name: tangjiaping, account: janny1868}
+    client:
+      - NB1
+      - NB2
+      - NB3

@@ -1,20 +1,20 @@
-package com.itouba.teamwork.config;
-
+package com.itouba.obteamwork.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @ConfigurationProperties(prefix = "app")
-public class AppConfig {
+@PropertySource("classpath:application-dev.yml")
+public class AppConf {
     private String url;
     private String token;
-    private HashMap user;
-
-
-
+    private UserInfo user;
+    private HashMap<String, Object> path;
     private List<String> client;
 
     public String getUrl() {
@@ -33,12 +33,20 @@ public class AppConfig {
         this.token = token;
     }
 
-    public HashMap getUser() {
+    public UserInfo getUser() {
         return user;
     }
 
-    public void setUser(HashMap user) {
+    public void setUser(UserInfo user) {
         this.user = user;
+    }
+
+    public HashMap<String, Object> getPath() {
+        return path;
+    }
+
+    public void setPath(HashMap<String, Object> path) {
+        this.path = path;
     }
 
     public List<String> getClient() {
@@ -51,10 +59,12 @@ public class AppConfig {
 
     @Override
     public String toString() {
-        return "AppConfig{" +
+        UUID uuid = UUID.randomUUID();
+        return "AppConf{" +
                 "url='" + url + '\'' +
                 ", token='" + token + '\'' +
-                ", user=" + user +
+                ", uuid=" + uuid +
+                ", path=" + path +
                 ", client=" + client +
                 '}';
     }

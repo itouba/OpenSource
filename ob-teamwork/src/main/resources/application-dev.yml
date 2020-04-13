@@ -1,0 +1,19 @@
+app:
+  url: http://www.huairuan.com
+  token: a94d46fb-5160-4694-8c07-aa5f3a16dbf4
+  path: {login: /login, pay: /pay, admin: /admin}
+  client:
+    - ANDROID
+    - IOS
+    - APPLET
+
+server:
+  port: 9090
+
+#redis配置
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 1
+

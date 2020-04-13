@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/spring_cache?useUnicode=true&characterEncoding=UTF8&serverTimezone=UTC
+    username: itouba
+    password: password123
+  messages:
+    basename: i18n/message
+
+
+#开启驼峰命名匹配规则
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+    org.springframework: debug
+    com.itouba.obteamwork.mapper: debug

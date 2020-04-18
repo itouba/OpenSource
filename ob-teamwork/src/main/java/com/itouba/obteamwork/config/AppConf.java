@@ -10,6 +10,7 @@ import java.util.UUID;
 @Component
 @ConfigurationProperties(prefix = "app")
 @PropertySource("classpath:application-dev.yml")
+
 public class AppConf {
     private String url;
     private String token;

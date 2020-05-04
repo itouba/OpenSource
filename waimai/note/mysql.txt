@@ -1,0 +1,52 @@
+1、下载mysql
+docker pull mysql:8.0
+2、设置数据库文件映射：
+mkdir -p /mysql/data
+chmod 777 /mysql/data
+3、运行docker容器
+docker run -it --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password123 -v /mysql/data:/var/lib/mysql  mysql:8.0 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+4、进入mysql
+docker exec -it mysql /bin/bash
+
+5、进入mysql：
+mysql -u root -p
+
+6、修改本地密码永不过期
+ALTER USER 'root'@'localhost' IDENTIFIED BY '密码' PASSWORD EXPIRE NEVER;    #修改root的密码与加密方式
+
+6、解除IP登录限制
+
+ALTER user 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password123';
+flush privileges;    #刷新权限
+
+
+配置文件my.cnf内容如下：
+[mysqld]
+    port = 3306
+    basedir = /var/lib/mysql
+    datadir = /var/lib/mysql/data
+    socket = /var/lib/mysql/mysql.sock
+    character-set-server=utf8
+    sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+[client]
+   socket = /var/lib/mysql/mysql.sock
+   default-character-set=utf8
+
+
+mysql8.0修改密码
+use mysql;  
+1、查询密码
+ select host,user,authentication_string from mysql.user;
+
+2、清空密码：
+ update user set authentication_string='' where user='root';
+3、重置密码
+ALTER user 'root'@'localhost' IDENTIFIED BY '新密码'
+4、刷新权限
+
+ FLUSH PRIVILEGES; 
+
+注意：重装时需要清空映射文件，否则密码失效
+
+

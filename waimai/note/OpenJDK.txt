@@ -1,0 +1,43 @@
+# Centos版本
+FROM centos:7
+# 作者
+MAINTAINER itouba
+
+# 设置app根目录
+ENV APP_HOME /app
+
+# 创建app上传目录
+RUN mkdir -p $APP_HOME
+
+# 创建Java解压目录
+RUN mkdir -p /java
+
+# 复制并解压JDK
+ADD OpenJDK8U-x64_linux_8u212b03.tar.gz /java/
+
+# 重命名JDK目录
+RUN mv /java/openjdk-8u212-b03 /java/openjdk-8u
+
+# 设置JAVA_HOME环境变量
+ENV JAVA_HOME /java/openjdk-8u
+
+# 设置JRE_HOME环境变量
+ENV JRE_HOME ${JAVA_HOME}/jre
+
+# 设置CLASSPATH环境变量
+ENV CLASSPATH .:${JAVA_HOME}/lib:${JRE_HOME}/lib
+
+# PATH环境变量添加JAVA_HOME
+ENV PATH ${JAVA_HOME}/bin:$PATH
+
+# 设置工作路径
+WORKDIR $APP_HOME
+
+# 安装vim组件
+RUN yum -y install vim
+
+# 开启Web端口
+EXPOSE 8080
+
+# 命令解析器
+CMD /bin/bash

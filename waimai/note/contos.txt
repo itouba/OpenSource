@@ -1,0 +1,51 @@
+1、su root
+2、vim a.txt  i编辑  dd   esc  shift+: wq q q!
+2、 mkdir -p /mysql/test
+3、rm -fr dir
+4、mv a.txt b.txt
+5、tar -zxvf xxx.gz
+6、yum install gcc-c++
+6、make   make distclean
+7、make
+8、make install
+9、cp redis.conf /redis/redis.conf
+10、ps -ef|grep redis
+11、redis-server redis.conf
+12、redis-cli -p 6379
+13、shutdown
+14、redis-benchmark
+
+可视化安装：
+yum groupinstall "GNOME Desktop" "Graphical Administration Tools"
+ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
+查看分区
+fdisk -l
+查看挂载
+df -h
+磁盘分区：
+fdisk /dev/vdb
+n  //新建
+p  //主分区，最多3个
+1  //创建一个分区
+2048  //起始族
++10G  //结束族
+p     //执行分区
+w保存
+格式化硬盘：
+mkfs.xfs -f /dev/vdb1
+
+挂载分区到app目录
+mount /dev/vdb1  /app/
+
+查看挂载
+df -h
+格式化：
+mkfs -t xfs -f /dev/vdb1
+
+查看OS版本
+ cat /etc/redhat-release
+
+修改主机名称
+vi /etc/hostname 
+全选：
+ggVG

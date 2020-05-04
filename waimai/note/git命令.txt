@@ -1,0 +1,21 @@
+第一步建立本地仓库，在文件目录下cmd：
+git init
+git config user.name "someone"
+git config user.email "someone@someplace.com"
+git add *    ---添加
+git add .    ---删除
+git commit -m '备注内容'
+
+第二步建立远程仓库，并在本地执行以下命令
+git remote add origin https://github.com/itouba/waimai.git
+
+第三步：解决ssl问题
+set GIT_SSL_NO_VERIFY=true git push
+或（长期有效）：
+git config http.sslVerify "false"
+
+第四步：提交代码
+git push -u origin master
+
+克隆代码时注意使用：
+env GIT_SSL_NO_VERIFY=true git clone https://<host_name/git/project.git

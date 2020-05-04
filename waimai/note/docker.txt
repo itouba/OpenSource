@@ -1,0 +1,67 @@
+1、进阿里云开发中心，服务里选择容器镜像，在控制中心选择加速器
+2、选择操作系统，查看参考文档docker-ce链接
+# step 1: 安装必要的一些系统工具
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+# Step 2: 添加软件源信息
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+# Step 3: 更新并安装 Docker-CE
+sudo yum makecache fast
+sudo yum -y install docker-ce
+# Step 4: 开启Docker服务
+sudo service docker start
+
+安装应用：
+1、 docker search --no-trunc tomcat
+2、docker pull tomcat:latest
+3、docker rmi -f tomcat:latest
+4、docker rmi -f $(docker images -aq)删除全部
+5、docker run -it(-d) -p 80:8080 --name tomcat-1 tomcat:latest
+6、docker run -it -v /root/data/logs:/usr/local/tomcat/logs -p 80:80 --name tomcat itouba/tomcat:1.0 /bin/bash
+
+启动服务：
+systemctl start docker
+systemctl restart docker
+
+容器操作：
+1、退出 exit 或 ctrl+p+q
+2、删除 docker rm name
+3、删除全部 docker rm -f $(docker ps -q)
+4、启动容器 docker start name
+5、重启容器 docker restart name
+6、停止容器 docker stop name
+7、强制停止 docker kill name
+8、查看日志 docker logs -t -f (--tail 10) name
+9、进入容器 docker attach name
+10、执行容器 docker exec -it name /bin/bash
+11、查看文件 docker exec -t name cat  /usr/local/tomcat/conf/server.xml
+12、复制文件  docker cp 容器ID:/temp/a.txt /root 或 docker cp a.txt 容器ID:/temp/
+
+目录隐射：
+docker run -v /宿主机绝对路径目录:/容器内目录:ro 镜像名  -ro只读
+
+打包：
+docker commit -a="itouba" -m="tomcat port is 80" 容器ID itouba/tomcat
+docker build -t registry.cn-shenzhen.aliyuncs.com/itouba/tomcat:1.2 .
+
+DockerFile:
+1、查看分层 docker inspect id
+
+mysql启动：
+docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password123 -d mysql:5.6
+查看端口：
+netstat -anp
+安装vim：
+apt-get update
+apt-get install vim
+
+yum安装：
+查看java版本库
+yum search java|grep jdk
+yum install java-1.8.0-openjdk -y
+
+docker构建
+docker build -t registry.cn-shenzhen.aliyuncs.com/itouba/centos:7.6 .
+docker run -it -p 10101:8080 --name centos7.6 registry.cn-shenzhen.aliyuncs.com/itouba/centos:7.6
+docker push registry.cn-shenzhen.aliyuncs.com/itouba/centos:7.6
+
+

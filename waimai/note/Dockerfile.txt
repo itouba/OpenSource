@@ -1,0 +1,54 @@
+# Centos版本
+FROM centos:7
+# 作者
+MAINTAINER itouba
+
+# 设置app根目录
+ENV APP_HOME /app
+
+# 创建app上传目录
+RUN mkdir -p $APP_HOME
+
+# 创建Java解压目录
+RUN mkdir -p /java
+
+# 复制并解压JDK
+ADD jdk-8u212-linux-x64.tar.gz /java/
+
+# 重命名JDK目录
+RUN mv /java/jdk1.8.0_212 /java/jdk1.8.0
+
+# 设置JAVA_HOME环境变量
+ENV JAVA_HOME /java/jdk1.8.0
+
+# 设置JRE_HOME环境变量
+ENV JRE_HOME ${JAVA_HOME}/jre
+
+# 设置CLASSPATH环境变量
+ENV CLASSPATH .:${JAVA_HOME}/lib:${JRE_HOME}/lib
+
+# PATH环境变量添加JAVA_HOME
+ENV PATH ${JAVA_HOME}/bin:$PATH
+
+# 设置工作路径
+WORKDIR $APP_HOME
+
+# 安装vim组件
+RUN yum -y install vim
+
+# 开启Web端口
+EXPOSE 8080
+
+# 命令解析器
+CMD /bin/bash
+
+
+yum search java|grep jdk
+docker rm -f $(docker ps -qa)
+
+
+docker构建
+docker build -t registry.cn-shenzhen.aliyuncs.com/itouba/centos:7.6 .
+docker run -it -p 10101:8080 -v /app/app-1:/app --name centos7.6 registry.cn-shenzhen.aliyuncs.com/itouba/centos:7.6
+docker run -it -p 80:8080 -v /app/app-1:/app --name centos7.6 registry.cn-shenzhen.aliyuncs.com/itouba/centos:7.6 /bin/bash -c "java -jar /app/dubbo-producer-0.0.1-SNAPSHOT.jar"
+docker push registry.cn-shenzhen.aliyuncs.com/itouba/centos:7.6

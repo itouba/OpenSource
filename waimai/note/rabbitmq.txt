@@ -1,0 +1,6 @@
+1、安装GCC编译器
+yum install gcc glibc-devel make ncurses-devel openssl-devel xmlto
+2、下载elang:
+wget -c http://erlang.org/download/otp_src_21.3.tar.gz
+3、github下载rabbitmq（与elang版本对应）
+wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.14/rabbitmq-server-generic-unix-3.7.14.tar.xz

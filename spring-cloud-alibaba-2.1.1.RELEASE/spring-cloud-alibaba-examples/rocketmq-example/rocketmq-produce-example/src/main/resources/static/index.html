@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<script src="http://lib.sinaapp.com/js/jquery/2.2.4/jquery-2.2.4.min.js"></script>
+</head>
+
+<body>
+看得到如下信息，说明加载成功！
+<script language="javascript">
+var id = Math.ceil(Math.random()*1000);;
+var type = id%2 == 0 ? "article" : "order";
+
+function cmd(){
+    var start = (new Date()).valueOf();
+    $.ajax({
+        type:"get",
+        url:"http://localhost:8020/cmd/"+type+"/"+id,
+        success:function(data){
+            var end = (new Date()).valueOf();
+            console.log("time:"+(end-start));
+            if(data!="ok"){
+				setTimeout(function (){
+				 	getdata();
+				}, 250);
+            }else{
+                console.log(data);
+            }
+        }
+    });
+}
+
+function getdata(){
+    var start = (new Date()).valueOf();
+    $.ajax({
+        type:"get",
+        url:"http://localhost:8020/result/"+type+"/"+id,
+        success:function(data){
+			var end = (new Date()).valueOf();
+			console.log("time:"+(end-start));
+            console.log(data);
+        }
+    });
+}
+cmd();
+</script>
+</body>
+</html>

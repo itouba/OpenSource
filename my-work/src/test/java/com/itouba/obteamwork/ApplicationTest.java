@@ -1,6 +1,6 @@
 package com.itouba.obteamwork;
 
-import com.itouba.obteamwork.mapper.TeamMapper;
+import com.itouba.obwork.mapper.TeamMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
